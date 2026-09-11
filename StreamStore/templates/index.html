@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STREAM STORE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- STEP 1: WELCOME SCREEN -->
+    <div id="welcome-screen">
+        <h1 class="welcome-title">WELCOME TO STREAM STORE</h1>
+    </div>
+
+    <!-- STEP 2: COUNTRY SELECTION SCREEN -->
+    <div id="country-screen" class="hidden">
+        <header class="navbar">
+            <div class="logo">STREAM <span>STORE</span></div>
+            <a href="https://www.instagram.com/__stream_store_?stkn=eXBva3hpa21zd3Bt" target="_blank" class="help-btn">Help & Helpline 💬</a>
+        </header>
+
+        <main class="container">
+            <h1 class="heading">From which country are you?</h1>
+            <p class="subtitle">Select your country to get local currency and pricing</p>
+
+            <div class="country-grid">
+                <div class="country-card" onclick="selectCountry('Nepal')">
+                    <div class="flag-container">
+                        <img src="https://flagcdn.com/w160/np.png" alt="Nepal Flag" class="flag-img">
+                    </div>
+                    <h2>Nepal</h2>
+                    <span class="currency-tag">NPR (NRS)</span>
+                </div>
+
+                <div class="country-card" onclick="selectCountry('India')">
+                    <div class="flag-container">
+                        <img src="https://flagcdn.com/w160/in.png" alt="India Flag" class="flag-img">
+                    </div>
+                    <h2>India</h2>
+                    <span class="currency-tag">INR (₹)</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- STEP 3: MAIN STORE HOMEPAGE -->
+    <div id="main-store" class="hidden">
+        <header class="navbar">
+            <div class="logo">STREAM <span>STORE</span></div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <a href="https://www.instagram.com/__stream_store_?stkn=eXBva3hpa21zd3Bt" target="_blank" class="help-btn">Help & Helpline 💬</a>
+                <div id="selected-country-badge" class="theme-tag">
+                    <img id="badge-flag" src="https://flagcdn.com/w40/np.png" class="badge-flag-img" alt="Flag">
+                    <span id="badge-country-name">Nepal</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <h1 class="heading">Select Category</h1>
+            <p class="subtitle">Choose from streaming services or cloud storage memberships</p>
+
+            <!-- CATEGORY 1: MOVIE SUBSCRIPTIONS -->
+            <div class="category-section">
+                <h2 class="category-title">🎬 Movie & Entertainment Subscriptions</h2>
+                <div class="card-grid">
+                    <div class="card prime" onclick="selectService('Amazon Prime Video')">
+                        <div class="card-icon prime-icon">prime video</div>
+                        <h2>Amazon Prime Video</h2>
+                        <p>Movies, TV shows, and original series in HD and 4K UHD.</p>
+                    </div>
+
+                    <div class="card netflix" onclick="selectService('Netflix')">
+                        <div class="card-icon netflix-icon">N</div>
+                        <h2>Netflix</h2>
+                        <p>Award-winning originals, movies, TV shows, and documentaries.</p>
+                    </div>
+
+                    <div class="card disney" onclick="selectService('Disney+ Hotstar')">
+                        <div class="card-icon disney-icon">Disney+ hotstar</div>
+                        <h2>Disney+ Hotstar</h2>
+                        <p>Blockbuster movies, live sports, exclusive shows, and family favorites.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 2: CLOUD STORAGE MEMBERSHIPS -->
+            <div class="category-section" style="margin-top: 50px;">
+                <h2 class="category-title">☁️ Cloud Storage Memberships</h2>
+                <div class="card-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 750px; margin: 0 auto;">
+                    <div class="card icloud" onclick="selectService('iCloud Storage')">
+                        <div class="card-icon icloud-icon">☁️ iCloud</div>
+                        <h2>iCloud+ Storage</h2>
+                        <p>Expand Apple storage for Photos, Files, and Backups across Apple devices.</p>
+                    </div>
+
+                    <div class="card gdrive" onclick="selectService('Google Storage')">
+                        <div class="card-icon gdrive-icon">📁 Google One</div>
+                        <h2>Google Storage (Google One)</h2>
+                        <p>Storage for Google Drive, Gmail, and Google Photos with member benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- STEP 4: SUBSCRIPTION PLAN SELECTION -->
+    <div id="plan-screen" class="hidden">
+        <header class="navbar">
+            <button class="back-btn" onclick="backToStore()">← Back to Store</button>
+            <a href="https://www.instagram.com/__stream_store_?stkn=eXBva3hpa21zd3Bt" target="_blank" class="help-btn">Help & Helpline 💬</a>
+        </header>
+
+        <main class="container">
+            <h1 id="selected-service-title" class="heading">Netflix</h1>
+            <p class="subtitle">Choose your subscription duration</p>
+
+            <div class="plan-grid">
+                <div class="plan-card" onclick="selectPlan('1 Month')">
+                    <h2>1 Month</h2>
+                    <p>Standard Access</p>
+                    <div class="plan-price" id="price-1m">NPR 450</div>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+
+                <div class="plan-card popular" onclick="selectPlan('3 Months')">
+                    <span class="popular-tag">Popular</span>
+                    <h2>3 Months</h2>
+                    <p>Quarterly Savings</p>
+                    <div class="plan-price" id="price-3m">NPR 999</div>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+
+                <div class="plan-card" onclick="selectPlan('6 Months')">
+                    <h2>6 Months</h2>
+                    <p>Half Year Access</p>
+                    <div class="plan-price" id="price-6m">NPR 1,799</div>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+
+                <div class="plan-card best-value" onclick="selectPlan('1 Year')">
+                    <span class="popular-tag green">Best Value</span>
+                    <h2>1 Year</h2>
+                    <p>Maximum Discount</p>
+                    <div class="plan-price" id="price-12m">NPR 2,999</div>
+                    <button class="select-btn">Select Plan</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- STEP 5: PAYMENT SELECTION & SUCCESS SCREEN -->
+    <div id="payment-screen" class="hidden">
+        <header class="navbar">
+            <button class="back-btn" onclick="backToPlans()">← Back to Plans</button>
+            <a href="https://www.instagram.com/__stream_store_?stkn=eXBva3hpa21zd3Bt" target="_blank" class="help-btn">Help & Helpline 💬</a>
+        </header>
+
+        <main class="container">
+            <!-- VIEW A: PAYMENT METHOD (QR ONLY) -->
+            <div id="payment-options-view">
+                <h1 class="heading">Complete Your Payment</h1>
+                <p id="order-summary-text" class="subtitle">Order Details: Netflix (3 Months)</p>
+
+                <div class="rules-box">
+                    <h3>📌 Payment Rules & Guidelines</h3>
+                    <ul>
+                        <li>1. <strong>Remarks:</strong> Type <code>STREAM STORE</code> in the payment remarks section.</li>
+                        <li>2. <strong>Screenshot:</strong> Upload a clear screenshot of your payment receipt below after transferring funds.</li>
+                    </ul>
+                </div>
+
+                <div class="payment-grid" style="max-width: 450px; margin: 0 auto;">
+                    <div class="payment-card" onclick="openQRPayment()">
+                        <div class="pay-icon">📲</div>
+                        <h2 id="qr-option-title">eSewa / Fonepay</h2>
+                        <p>Scan & Pay using QR Code</p>
+                        <span class="pay-badge">Instant Payment</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW B: SEPARATE QR PAGE -->
+            <div id="qr-modal" class="hidden">
+                <button class="back-btn" onclick="closeQRPayment()" style="margin-bottom: 20px;">← Back to Payment Methods</button>
+                <div class="qr-box">
+                    <h3 id="qr-modal-title">Scan to Pay via eSewa</h3>
+                    <div class="qr-container">
+                        <img id="qr-code-img" src="{{ url_for('static', filename='qr-esewa.png') }}" alt="Payment QR Code" class="qr-image">
+                    </div>
+
+                    <div class="upload-section">
+                        <label for="payment-screenshot" class="upload-label">Upload Payment Screenshot (.png, .jpg)</label>
+                        <input type="file" id="payment-screenshot" accept="image/*" class="file-input">
+                    </div>
+
+                    <button class="confirm-pay-btn" onclick="submitPaymentProof()">Submit Payment Proof</button>
+                </div>
+            </div>
+
+            <!-- VIEW C: SUCCESS & INSTAGRAM ACTION SCREEN -->
+            <div id="success-screen" class="verification-box hidden">
+                <div class="success-badge">✅ Payment Submitted Successfully!</div>
+                <h2 style="font-size: 1.6rem; margin: 15px 0 10px;">Verification In Process</h2>
+                <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px;">
+                    Your payment screenshot has been sent for verification. Please message us on our Instagram page to receive your account ID, password, or setup configuration.
+                </p>
+                <a href="https://www.instagram.com/__stream_store_?stkn=eXBva3hpa21zd3Bt" target="_blank" class="confirm-pay-btn" style="display: inline-block; text-decoration: none; padding: 14px 28px; background: linear-gradient(90deg, #ec4899, #8b5cf6);">
+                    📩 Message Us on Instagram for Setup
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
